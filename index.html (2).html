@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Web Development exam MCQs</title>
+<style>
+:root{--bg:#faf9f5;--card:#fff;--tx:#1f1e1d;--mu:#6b6a65;--bd:#d9d6cc;--ok:#e3f1d8;--okb:#3b6d11;--no:#fbe3e1;--nob:#a32d2d;--ac:#534ab7;--cb:#f1efe8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1f1e1d;--card:#2b2a28;--tx:#f1efe8;--mu:#a8a69e;--bd:#454340;--ok:#27401a;--okb:#97c459;--no:#4a1f1f;--nob:#f09595;--ac:#afa9ec;--cb:#1a1918}}
+:root[data-theme="dark"]{--bg:#1f1e1d;--card:#2b2a28;--tx:#f1efe8;--mu:#a8a69e;--bd:#454340;--ok:#27401a;--okb:#97c459;--no:#4a1f1f;--nob:#f09595;--ac:#afa9ec;--cb:#1a1918}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:720px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:22px;font-weight:500;margin:0 0 4px}
+.sub{color:var(--mu);font-size:14px;margin:0 0 16px}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:8px 0;display:flex;justify-content:space-between;align-items:center;font-size:14px;border-bottom:1px solid var(--bd);margin-bottom:16px;z-index:5}
+button{font:inherit;cursor:pointer}
+.rs{background:none;border:1px solid var(--bd);color:var(--tx);border-radius:8px;padding:4px 12px}
+.q{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:16px;margin-bottom:16px}
+.n{color:var(--ac);font-size:13px;font-weight:500;margin-bottom:4px}
+.t{margin:0 0 8px}
+pre{background:var(--cb);border-radius:8px;padding:10px 12px;margin:0 0 10px;overflow-x:auto;font:13px/1.5 ui-monospace,Consolas,monospace}
+.o{display:block;width:100%;text-align:left;background:var(--card);color:var(--tx);border:1px solid var(--bd);border-radius:8px;padding:10px 12px;margin-top:8px}
+.o:hover:not(:disabled){border-color:var(--ac)}
+.o.ok{background:var(--ok);border-color:var(--okb)}
+.o.no{background:var(--no);border-color:var(--nob)}
+.e{display:none;margin-top:12px;font-size:14px;color:var(--mu);border-top:1px solid var(--bd);padding-top:10px}
+.res{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:16px;text-align:center;display:none}
+</style>
+</head>
+<body>
+<main>
+<h1>Web Development: tough MCQs</h1>
+<p class="sub">HTML, CSS and Flexbox. Tap an answer to see if you’re right. Order and options are shuffled each time.</p>
+<div class="bar"><span id="sc">Score: 0 / 0</span><button class="rs" onclick="start()">Reshuffle</button></div>
+<div id="qs"></div>
+<div class="res" id="res"></div>
+</main>
+<script>
+var D=[
+{q:"A 600px flex container holds three items, each width: 300px. Item 1 has flex-shrink: 0; the others keep the default. Final widths (item 1, 2, 3)?",a:["300px, 150px, 150px","200px, 200px, 200px","300px, 200px, 100px","100px, 250px, 250px"],e:"The items need 900px but only 600px exists, so 300px must be removed. Item 1 can’t shrink, so items 2 and 3 lose 150px each."},
+{q:"A 700px container holds three items with width: 100px and flex-grow values 1, 3 and 1. Final widths?",a:["180px, 340px, 180px","200px, 300px, 200px","160px, 380px, 160px","233px, 233px, 233px"],e:"Free space = 700 − 300 = 400px, shared 1:3:1 = 80, 240, 80. Each is added to its 100px base."},
+{q:"Which values (grow shrink basis) does the shorthand flex: 1 stand for?",a:["1 1 0","1 0 auto","0 1 auto","1 1 auto"],e:"flex: 1 means flex-grow 1, flex-shrink 1, flex-basis 0, so items ignore their own width when sharing space."},
+{q:"This container has 3 items and no flex-wrap. What does align-content: center do?",c:".box {\n  display: flex;\n  height: 400px;\n  align-content: center;\n}",a:["Nothing, because there is only one line","Centres the items vertically","Centres the items horizontally","Stretches the items to 400px"],e:"align-content positions the lines of a multi-line container. With no wrapping there is a single line, so it has no effect. align-items would be the one to centre them."},
+{q:"What are the default values of flex-grow, flex-shrink and flex-basis?",a:["0, 1, auto","1, 1, auto","0, 0, auto","1, 0, 0"],e:"By default items don’t grow, they do shrink, and their starting size is auto (their own width or height)."},
+{q:"Where do the items end up?",c:".c {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: flex-end;\n  height: 300px;\n}",a:["Centred vertically, pushed to the right edge","Centred horizontally, pushed to the bottom","Centred vertically, pushed to the left edge","In a row, centred, aligned to the bottom"],e:"With column, the main axis is vertical, so justify-content centres vertically. The cross axis is horizontal, so flex-end means the right side."},
+{q:"A container uses flex-direction: row-reverse with the default justify-content. HTML order is 1, 2, 3. What is shown?",a:["Packed on the right, reading left to right: 3, 2, 1","Packed on the left, reading 3, 2, 1","Packed on the right, reading 1, 2, 3","Packed on the left, reading 1, 2, 3"],e:"row-reverse flips the main axis, so main-start is on the right. flex-start packs there and item 1 sits furthest right."},
+{q:"A row flex container is 300px tall with no align-items set. Item A has no height; item B has height: 80px. What happens?",a:["A is 300px tall, B stays 80px","Both are 300px tall","A fits its text height, B is 80px","A is 300px tall, B is 150px"],e:"The default align-items is stretch, but it only stretches items whose height is auto. An explicit height wins."},
+{q:"600px container, three 100px items, justify-content: space-around. How far is item 1’s left edge from the container’s left edge?",a:["50px","75px","100px","0px"],e:"Free space is 300px over 3 items = 100px each, split 50px per side. (space-evenly would give 75px.)"},
+{q:"How many flex items does this container have?",c:"<div class=\"container\" style=\"display:flex\">\n  <div>1</div>\n  <div><span>2</span><span>3</span></div>\n  <p>4</p>\n</div>",a:["3","5","4","2"],e:"Only direct children become flex items: the two divs and the p. The spans are inside an item, not items themselves."},
+{q:"Which group contains only inline elements?",a:["<span>, <a>, <img>, <small>","<span>, <p>, <b>, <i>","<a>, <div>, <u>, <em>","<img>, <table>, <b>, <span>"],e:"p, div and table are block-level and start on a new line. span, a, img and small stay in the line."},
+{q:"A table has 3 columns. Row 1 is below. How many <td> does Row 2 need to stay aligned?",c:"<tr>\n  <td colspan=\"2\">X</td>\n  <td rowspan=\"2\">Y</td>\n</tr>",a:["2","3","1","0"],e:"X covers columns 1 and 2. Y occupies column 3 in both rows. Row 2 only needs cells for columns 1 and 2."},
+{q:"What happens when the user clicks the text “I agree”?",c:"<input type=\"checkbox\" id=\"terms\" name=\"agree\">\n<label for=\"agree\">I agree</label>",a:["Nothing, because for must match an id","The checkbox toggles, since for matches name","The form is submitted","The page stops rendering with an HTML error"],e:"A label’s for attribute links to the input’s id, not its name. Here no id is “agree”, so the label isn’t connected."},
+{q:"The user types in this field and submits the form. What is sent for that field?",c:"<form method=\"post\">\n  <input type=\"text\" id=\"email\">\n  <input type=\"submit\">\n</form>",a:["Nothing, because the input has no name","email=<typed value>","id=email&value=<typed value>","The form refuses to submit"],e:"The name attribute is the key sent with form data. The id is only for CSS, JavaScript and labels."},
+{q:"Which statement about the paragraphs is correct?",c:"<div>\n  <p>A</p>\n  <section><p>B</p></section>\n</div>\n<p>C</p>\n\ndiv p      { color: red; }\ndiv > p    { font-weight: bold; }\ndiv + p    { font-style: italic; }",a:["A red and bold; B red only; C italic only","A red and bold; B red and bold; C italic and red","A red only; B red and bold; C italic only","A red and bold; B red only; C italic and bold"],e:"A is a descendant and a direct child. B is a descendant but not a direct child. C is the next sibling of the div, so it is italic but neither red nor bold."},
+{q:"What colour is the paragraph?",c:"<head>\n  <link rel=\"stylesheet\" href=\"s.css\">  /* p { color: blue; } */\n  <style> p { color: green; } </style>\n</head>",a:["Green: equal specificity, so the later rule wins","Blue: external CSS always beats internal","Blue: linked files load first so they have priority","Green: internal CSS has higher specificity than external"],e:"Both are element selectors with equal specificity, so the cascade picks the last one. If the style tag came first, blue would win."},
+{q:"Which element is the child positioned against?",c:".grand  { position: relative; }\n.parent { /* no position set */ }\n.child  { position: absolute; top: 0; left: 0; }\n\n<div class=\"grand\"><div class=\"parent\"><div class=\"child\"></div></div></div>",a:[".grand, the nearest positioned ancestor",".parent, the immediate parent","The browser viewport","Its own normal position"],e:"static (the default) doesn’t count as positioned, so the browser skips .parent and uses .grand."},
+{q:"An element has position: relative; top: 20px. What happens to the space it originally occupied?",a:["It stays reserved; the element shifts 20px down visually","It collapses and siblings move up","The element leaves the flow and siblings move up","It moves 20px from the top of the viewport"],e:"Relative positioning offsets the element from its normal place but keeps its original space in the layout."},
+{q:"A div has width: 200px, padding: 15px, border: 2px solid and margin: 10px with the default box-sizing. How much horizontal space does it occupy?",a:["254px","234px","200px","244px"],e:"200 content + 30 padding + 4 border + 20 margin = 254px. The visible box (without margin) is 234px."},
+{q:"The query below is used and the viewport is exactly 600px wide. What layout is applied?",c:".container { display: flex; flex-direction: row; }\n@media (max-width: 600px) {\n  .container { flex-direction: column; }\n}",a:["Column, because max-width includes 600px","Row, because the width must be below 600px","Row, because the query only targets phones under 480px","The query is ignored at the exact breakpoint"],e:"max-width: 600px matches any width up to and including 600px, so column applies. At 601px it goes back to row."}
+];
+var done,right;
+function sh(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!==undefined)e.textContent=x;return e}
+function upd(){document.getElementById("sc").textContent="Score: "+right+" / "+done;if(done===D.length){var r=document.getElementById("res");r.style.display="block";r.textContent="Finished: "+right+" out of "+D.length+(right===D.length?". Perfect score!":right>=D.length*0.7?". Solid preparation.":". Review the explanations and try again.")}}
+function start(){
+done=0;right=0;document.getElementById("res").style.display="none";
+var box=document.getElementById("qs");box.textContent="";
+sh(D).forEach(function(d,i){
+var card=el("div","q");card.appendChild(el("div","n","Question "+(i+1)));card.appendChild(el("p","t",d.q));
+if(d.c){card.appendChild(el("pre","",d.c))}
+var ex=el("div","e","Explanation: "+d.e);var btns=[];
+sh(d.a).forEach(function(o){
+var b=el("button","o",o);btns.push(b);
+b.onclick=function(){
+btns.forEach(function(x){x.disabled=true;if(x.textContent===d.a[0])x.classList.add("ok")});
+if(o===d.a[0])right++;else b.classList.add("no");
+ex.style.display="block";done++;upd()};
+card.appendChild(b)});
+card.appendChild(ex);box.appendChild(card)});
+upd();window.scrollTo(0,0)}
+start();
+</script>
+</body>
+</html>
